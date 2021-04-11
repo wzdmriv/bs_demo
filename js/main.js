@@ -16,3 +16,15 @@ $(function($) {
       $nav.removeClass( open );
     });
 });
+
+$(function () {
+  $('#modalBg').click(function(){
+    $('#start_modalArea').fadeOut();
+  });
+});
+
+function close_startmodal(){
+  var noSleep = new NoSleep();
+  noSleep.enable();
+  $('#start_modalArea').fadeOut();
+}

@@ -102,4 +102,5 @@ ble.onRead = function (data, uuid){
 }
 window.onload = function () {
     ble.setUUID("UUID1",   "0000180d-0000-1000-8000-00805f9b34fb", "00002a37-0000-1000-8000-00805f9b34fb");
+    $('#start_modalArea').fadeIn();
 }

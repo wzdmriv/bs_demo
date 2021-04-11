@@ -4,20 +4,21 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <title>BS Demo</title>
-        <script type="text/javascript" src="jquery-3.6.0.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="swiper-bundle.min.css"/>
-        <link rel="stylesheet" type="text/css" href="main.css">
-        <link rel="stylesheet" type="text/css" href="hum.css">
-        <script type="text/javascript" src="bluejelly.js"></script>
-        <script type="text/javascript" src="ble.js"></script>
-        <script type="text/javascript" src="main.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/swiper-bundle.min.css"/>
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <link rel="stylesheet" type="text/css" href="css/hum.css">
+        <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript" src="js/bluejelly.js"></script>
+        <script type="text/javascript" src="js/NoSleep_min.js"></script>
+        <script type="text/javascript" src="js/ble.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
     </head>
 
     <body>
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <div id="data_text"><input type="button" value="Start" id="close_nosleep"/></div>
+                    <div id="data_text"></div>
                     <div id="uuid_name"></div>
                     <div id="status"></div>
                 </div>
@@ -32,8 +33,8 @@
                 <ul>
                   <li><div class="nav_content" onclick="startNotify()">Start Notify</div></li>
                   <li><div class="nav_content" onclick="stopNotify()">Stop Notify</div></li>
-                  <li><div class="nav_content" onclick="startNotify()">Calibration</div></li>
-                  <li><div class="nav_content" onclick="startNotify()">Download Latest Data</div></li>
+                  <li><div class="nav_content" onclick="">Calibration</div></li>
+                  <li><div class="nav_content" onclick="">Download Latest Data</div></li>
                 </ul>
               </div>
             </nav>
@@ -44,6 +45,16 @@
             </div>
             <div id="mask"></div>
         </div>
+
+        <section id="start_modalArea" class="modalArea">
+            <div id="modalBg" class="modalBg"></div>
+            <div class="modalWrapper">
+                <div class="modalContents">
+                    <input type="button" value="Start" onclick="close_startmodal()"/>
+                </div>
+            </div>
+        </section>
+
 
         <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
         <script>
