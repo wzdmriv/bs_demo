@@ -2,16 +2,34 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>BlueJelly</title>
+        <title>BS Demo</title>
+        <script type="text/javascript" src="jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+        <link rel="stylesheet" type="text/css" href="main.css">
         <script type="text/javascript" src="bluejelly.js"></script>
+        <script type="text/javascript" src="ble.js"></script>
         <script type="text/javascript" src="main.js"></script>
     </head>
 
     <body>
-        <div id="data_text">Hello, BlueJelly!</div>
-        <div id="uuid_name"> </div>
-        <div id="status"> </div>
-        <input type="button" value="startNotify" onclick="startNotify()">
-        <input type="button" value="stopNotify" onclick="stopNotify()">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div id="data_text">Hello, BlueJelly!</div>
+                    <div id="uuid_name"> </div>
+                    <div id="status"> </div>
+                    <input type="button" value="startNotify" onclick="startNotify()">
+                    <input type="button" value="stopNotify" onclick="stopNotify()">
+                </div>
+                <div class="swiper-slide"></div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+
+
+        <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+        <script>
+            var swiper = new Swiper('.swiper-container', {pagination: {el: '.swiper-pagination'}});
+        </script>
     </body>
 </html>
