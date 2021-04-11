@@ -33,7 +33,7 @@ nav .inner ul li {
   margin: 0;
   border-bottom: 1px solid #333;
 }
-nav .inner ul li a {
+nav .inner ul li .nav_content {
   display: block;
   color: #333;
   font-size: 14px;
@@ -41,7 +41,7 @@ nav .inner ul li a {
   text-decoration: none;
   transition-duration: 0.2s;
 }
-nav .inner ul li a:hover {
+nav .inner ul li .nav_content:hover {
   background: #e4e4e4;
 }
 @media screen and (max-width: 767px) {
@@ -70,7 +70,7 @@ nav .inner ul li a:hover {
   left: 0;
   width: 30px;
   height: 2px;
-  background-color: #333;
+  background-color: #EEE;
   border-radius: 4px;
   transition: all .5s;
 }

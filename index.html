@@ -17,10 +17,9 @@
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <div id="data_text">Hello, BlueJelly!</div>
+                    <div id="data_text">BS Demo</div>
                     <div id="uuid_name"></div>
                     <div id="status"></div>
-                    <input type="button" value="startNotify" onclick="startNotify()">
                 </div>
                 <div class="swiper-slide"></div>
             </div>
@@ -31,9 +30,10 @@
             <nav>
               <div class="inner">
                 <ul>
-                  <li><a href="#">Text</a></li>
-                  <li><a href="#">Text</a></li>
-                  <li><a href="#">Text</a></li>
+                  <li><div class="nav_content" onclick="startNotify()">Start Notify</div></li>
+                  <li><div class="nav_content" onclick="stopNotify()">Stop Notify</div></li>
+                  <li><div class="nav_content" onclick="startNotify()">Calibration</div></li>
+                  <li><div class="nav_content" onclick="startNotify()">Download Latest Data</div></li>
                 </ul>
               </div>
             </nav>
