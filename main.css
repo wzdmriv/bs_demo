@@ -45,22 +45,28 @@ body {
 
 
 input[type="button"]{
-    padding: 7px;
-    border-radius: 2px;
-    font-size: 18px;
-    outline: none;
-    border: 2px solid #ddd;
+    font-size: 1.6rem;
+    position: relative;
+    display: inline-block;
+    padding: 1rem 3rem;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    color: #212529;
+    border: 2px solid #000;
+    border-radius: 0;
     background: #fff;
-    color: #444;
-    width: 150px;
-    box-sizing: border-box;
-    font-family:  Helvetica, Arial, sans-serif;
     -webkit-appearance: none;
 }
 input[type="button"]:hover {
-    background: #ddd;
-}
-input[type="button"]:focus {
-    background:#ddd;
-    color:#444;
+    color: #fff;
+    background: #000;
 }
