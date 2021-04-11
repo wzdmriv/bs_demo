@@ -1,3 +1,7 @@
+var sens_value = [];
+var vent_value = [];
+var amp_value = [];
+
 function parseHeartRate(value) {
     value = value.buffer ? value : new DataView(value);
     let flags = value.getUint8(0);
@@ -51,12 +55,29 @@ function getValueList(value){
         vlsens.push(parseInt(vl16[j*2+1]+vl16[j*2],16));
     }
 
-    
+    for (let k=0; k<vlsens.length; k++){
+        if (vlsens[k]>=24576){
+            temp= vlsens[k]-24576;
+            amp_value.push(temp);
+        }else if(vlsens[k]>=16384){
+            temp= vlsens[k]-16384;
+            vent_value.push(temp);
+        }else{
+            if (vlsens[k]>=8192){
+                temp = vlsens[k] - 16384;
+                sens_value.push(temp);
+            }else{
+                temp = vlsens[k];
+                sens_value.push(temp);
+            }
+        }
+    }
 
     var x_ac = getAC(vl16[vl16.length-4]);
     var y_ac = getAC(vl16[vl16.length-2]);
     var z_ac = getAC(vl16[vl16.length-3][1]+vl16[vl16.length-1][1]);
     console.log("x_ac:"+x_ac+",y_ac:"+y_ac+",z_ac:"+z_ac)
+    console.log(sens_value)
     return [vl16,vlsens];
 }
 
@@ -111,10 +132,7 @@ ble.onRead = function (data, uuid){
     value = getValueList(data);
     vl16 = value[0];
     vlsens = value[1];
-    //コンソールに値を表示
-    console.log(vl16);
-    console.log(vlsens);
-    //HTMLにデータを表示
+    
     document.getElementById('data_text').innerHTML = value;
     document.getElementById('uuid_name').innerHTML = uuid;
     document.getElementById('status').innerHTML = "read data"
