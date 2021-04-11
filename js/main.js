@@ -28,3 +28,10 @@ function close_startmodal(){
   noSleep.enable();
   $('#start_modalArea').fadeOut();
 }
+
+function layout(){
+  var ww = window.innerWidth;
+  var hh = window.innerHeight;
+  var data_size = parseInt(Math.min(ww,hh)*0.3);
+  $('#data_text').css({'font-size':data_size+'px'});
+}

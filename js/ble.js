@@ -62,45 +62,35 @@ function getAC(value){
 
 function startNotify() {
     ble.startNotify('UUID1');
+    $('#navArea').removeClass( "open" );
 }
 
 function stopNotify(){
     ble.stopNotify('UUID1');
+    $('#navArea').removeClass( "open" );
 }
 
 
 ble.onScan = function (deviceName) {
-    document.getElementById('data_text').innerHTML = deviceName;
 }
 ble.onConnectGATT = function (uuid) {
     console.log('> connected GATT!');
-  
-    document.getElementById('uuid_name').innerHTML = uuid;
-    document.getElementById('status').innerHTML = "connected GATT!";
 }
 
 ble.onStartNotify = function(uuid){
     console.log('> Start Notify!');
-  
-    document.getElementById('uuid_name').innerHTML = uuid;
-    document.getElementById('status').innerHTML = "started Notify";
 }
 
 ble.onStopNotify = function(uuid){
     console.log('> Stop Notify!');
-  
-    document.getElementById('uuid_name').innerHTML = uuid;
-    document.getElementById('status').innerHTML = "stopped Notify";
 }
 
 ble.onRead = function (data, uuid){
     value = getValueList(data);
-    
-    document.getElementById('data_text').innerHTML = value;
-    document.getElementById('uuid_name').innerHTML = uuid;
-    document.getElementById('status').innerHTML = "read data"
+    document.getElementById('data_text').innerHTML = value[value.length-1];
 }
 window.onload = function () {
     ble.setUUID("UUID1",   "0000180d-0000-1000-8000-00805f9b34fb", "00002a37-0000-1000-8000-00805f9b34fb");
     $('#start_modalArea').fadeIn();
+    layout()
 }
