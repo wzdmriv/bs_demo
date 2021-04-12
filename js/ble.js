@@ -1,7 +1,10 @@
-var sens_value = [];
+var sens_value_calib = [];
 var vent_value = [];
 var amp_value = [];
 var ble = new BlueJelly();
+var min_sens = 0;
+var max_sens = 100;
+var calib_flag = 0;
 
 function getValueList(value){
     var vl = [];
@@ -32,10 +35,18 @@ function getValueList(value){
         }else{
             if (vlsens[k]>=8192){
                 temp = vlsens[k] - 16384;
-                sens_value_temp.push(temp);
+                temp = (temp-min_sens)*100/(max_sens-min_sens);
+                sens_value_temp.push(Math.round(temp));
+                if (calib_flag===1){
+                    sens_value_calib.push(temp);
+                }
             }else{
                 temp = vlsens[k];
-                sens_value_temp.push(temp);
+                temp = (temp-min_sens)*100/(max_sens-min_sens);
+                sens_value_temp.push(Math.round(temp));
+                if (calib_flag===1){
+                    sens_value_calib.push(temp);
+                }
             }
         }
     }
@@ -88,9 +99,13 @@ ble.onStopNotify = function(uuid){
 ble.onRead = function (data, uuid){
     value = getValueList(data);
     document.getElementById('data_text').innerHTML = value[value.length-1];
+    var circle_size_temp = value[value.length-1];
+    if (circle_size_temp<0){
+        circle_size_temp = 0;
+    }
+    $('#data_circle').css({'-webkit-transform':"scale("+(circle_size_temp/100)+")",'-moz-transform':"scale("+(circle_size_temp/100)+")"});
 }
 window.onload = function () {
     ble.setUUID("UUID1",   "0000180d-0000-1000-8000-00805f9b34fb", "00002a37-0000-1000-8000-00805f9b34fb");
-    $('#start_modalArea').fadeIn();
     layout()
 }
