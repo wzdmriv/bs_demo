@@ -2,8 +2,8 @@ $(function($) {
     var $nav   = $('#navArea');
     var $btn   = $('.toggle_btn');
     var $mask  = $('#mask');
-    var open   = 'open'; // class
-    // menu open close
+    var open   = 'open';
+
     $btn.on( 'click', function() {
       if ( ! $nav.hasClass( open ) ) {
         $nav.addClass( open );
@@ -11,7 +11,7 @@ $(function($) {
         $nav.removeClass( open );
       }
     });
-    // mask close
+
     $mask.on('click', function() {
       $nav.removeClass( open );
     });
@@ -24,6 +24,10 @@ $(function () {
   $('#startcalib_modalBg').click(function(){
     $('#startcalib_modalArea').fadeOut();
   });
+  $('#rec_modalBg').click(function(){
+    $('#rec_modalArea').fadeOut();
+  });
+  $("#rec_button").on('click',function(){startRec();});
 });
 
 function close_startmodal(){
@@ -56,6 +60,58 @@ function start_calib(){
   };
   setTimeout(calib, 10000);
   document.getElementById("startcalib_Content").innerHTML = "Calibrating…";
+}
+
+function openRec(){
+  $('#rec_modalArea').fadeIn();
+}
+
+function startRec(){
+  console.log("start")
+  rec_time = [];
+  rec_value = [];
+  rec_flag = 1;
+  $("#rec_button").on('click',function(){stopRec();});
+  document.getElementById("rec_Content").innerHTML = "Stop Rec";
+  $('#rec_modalArea').fadeOut();
+}
+
+function stopRec(){
+  console.log("stop")
+  rec_flag = 0;
+  $("#rec_button").on('click',function(){startRec();});
+  document.getElementById("rec_Content").innerHTML = "Start Rec";
+  $('#rec_modalArea').fadeOut();
+}
+
+function downloadCSV() {
+  console.log(rec_time)
+  console.log(rec_value)
+  if (!rec_time.length===rec_value.length || rec_time.length===0){
+    alert("data error!")
+  }else{
+    const filename = "data.csv";
+    var data = "time, data\n";
+    var rec_temp = [];
+    for (let i=0; i<rec_time.length; i++){
+      rec_temp.push(String(rec_time[i])+","+String(rec_value[i]));
+    }
+    data = data + rec_temp.join("\n");
+    const bom = new Uint8Array([0xef, 0xbb, 0xbf]);
+    const blob = new Blob([bom, data], { type: "text/csv" });
+  
+    if (window.navigator.msSaveBlob) {
+        window.navigator.msSaveBlob(blob, filename);
+    } else {
+        const url = (window.URL || window.webkitURL).createObjectURL(blob);
+        const download = document.createElement("a");
+        download.href = url;
+        download.download = filename;
+        download.click();
+        (window.URL || window.webkitURL).revokeObjectURL(url);
+    }
+  }
+
 }
 
 function layout(){

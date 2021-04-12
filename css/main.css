@@ -7,7 +7,7 @@ html,body {
 body {
     background: #eee;
     font-family:  Helvetica, Arial, sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     color: #000;
     margin: 0px;
     padding: 0px;
@@ -31,6 +31,7 @@ body {
   overflow: hidden;
   -webkit-transition: -webkit-transform 1s linear;
   -moz-transition: -moz-transform 1s linear;
+  z-index: 1;
 }
 
 .swiper-container {
@@ -54,6 +55,7 @@ body {
 }
 .swiper-slide:nth-child(4n+1) {
 	background-color: #5A98BF;
+    z-index: 2;
 }
 .swiper-slide:nth-child(4n+2) {
 	background-color: #021740;

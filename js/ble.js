@@ -1,3 +1,5 @@
+var rec_value = [];
+var rec_time = [];
 var sens_value_calib = [];
 var vent_value = [];
 var amp_value = [];
@@ -5,6 +7,7 @@ var ble = new BlueJelly();
 var min_sens = 0;
 var max_sens = 100;
 var calib_flag = 0;
+var rec_flag = 0;
 
 function getValueList(value){
     var vl = [];
@@ -39,6 +42,10 @@ function getValueList(value){
                 sens_value_temp.push(Math.round(temp));
                 if (calib_flag===1){
                     sens_value_calib.push(temp);
+                }else if(rec_flag===1){
+                    rec_value.push(temp);
+                    var time_temp = new Date();
+                    rec_time.push(time_temp.getTime());
                 }
             }else{
                 temp = vlsens[k];
@@ -46,6 +53,10 @@ function getValueList(value){
                 sens_value_temp.push(Math.round(temp));
                 if (calib_flag===1){
                     sens_value_calib.push(temp);
+                }else if(rec_flag===1){
+                    rec_value.push(temp);
+                    var time_temp = new Date();
+                    rec_time.push(time_temp.getTime());
                 }
             }
         }

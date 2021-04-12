@@ -18,10 +18,10 @@
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <div id="data_text">0</div>
+                    <div id="data_text" onclick="openRec()">0</div>
                 </div>
                 <div class="swiper-slide">
-                    <div id="data_circle"></div>
+                    <div id="data_circle" onclick="openRec()"></div>
                 </div>
             </div>
             <div class="swiper-pagination"></div>
@@ -34,7 +34,7 @@
                   <li><div class="nav_content" onclick="startNotify()">Start Notify</div></li>
                   <li><div class="nav_content" onclick="stopNotify()">Stop Notify</div></li>
                   <li><div class="nav_content" onclick="open_calib()">Calibration</div></li>
-                  <li><div class="nav_content" onclick="">Download Latest Data</div></li>
+                  <li><div class="nav_content" onclick="downloadCSV()">Download Latest Data</div></li>
                 </ul>
               </div>
             </nav>
@@ -50,9 +50,11 @@
             <div id="start_modalBg" class="modalBg"></div>
             <div class="modalWrapper">
                 <div class="modalContents">
-                    Respiration Sensor
-                    <br><br>
+                    <br>
+                    Respiration Sensor Demo
+                    <br><br><br>
                     <input type="button" value="Start" onclick="close_startmodal()"/>
+                    <br><br>
                 </div>
             </div>
         </section>
@@ -61,9 +63,24 @@
             <div id="startcalib_modalBg" class="modalBg"></div>
             <div class="modalWrapper">
                 <div class="modalContents">
+                    <br>
                     <div id="startcalib_Content"></div>
                     <br><br>
                     <input type="button" value="Start" onclick="start_calib()"/>
+                    <br><br>
+                </div>
+            </div>
+        </section>
+
+        <section id="rec_modalArea" class="modalArea">
+            <div id="rec_modalBg" class="modalBg"></div>
+            <div class="modalWrapper">
+                <div class="modalContents">
+                    <br>
+                    <div id="rec_Content">Start Rec</div>
+                    <br><br>
+                    <input type="button" value="OK" id="rec_button"/>
+                    <br><br>
                 </div>
             </div>
         </section>
