@@ -30,6 +30,7 @@ body {
   border-radius: 100%;
   overflow: hidden;
   -webkit-transition: -webkit-transform 1s linear;
+  -moz-transition: -moz-transform 1s linear;
 }
 
 .swiper-container {
