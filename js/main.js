@@ -131,10 +131,12 @@ function downloadCSV() {
 function layout(){
   var ww = window.innerWidth;
   var hh = window.innerHeight;
-  var data_size = parseInt(Math.min(ww,hh)*0.3);
-  var timer_size = parseInt(Math.min(ww,hh)*0.05);
-  var circle_size = parseInt(Math.min(ww,hh)*0.8);
+  var size = Math.min(ww,hh);
+  var data_size = parseInt(size*0.35);
+  var timer_size = parseInt(size*0.07);
+  var timer_bottom = parseInt(size*0.1);
+  var circle_size = parseInt(size*0.8);
   $('#data_text').css({'font-size':data_size+'px'});
-  $('#timer').css({'font-size':timer_size+'px'});
+  $('#timer').css({'font-size':timer_size+'px','bottom':timer_bottom+'px'});
   $('#data_circle').css({'width':circle_size+'px','height':circle_size+'px'});
 }
