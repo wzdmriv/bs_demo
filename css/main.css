@@ -21,6 +21,14 @@ body {
     text-align: center;
 }
 
+#timer {
+    height: 100px;
+    position: relative;
+    position: absolute;
+    bottom: 0;
+    color: #EEE;
+}
+
 #data_circle {
   background: rgba(255,255,255,0);
   border: 2px solid #EEE;

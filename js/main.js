@@ -30,6 +30,11 @@ $(function () {
   $("#rec_button").on('click',function(){startRec();});
 });
 
+function countup() {
+	timer_count++;
+	document.getElementById("timer").innerHTML = timer_count;
+}
+
 function close_startmodal(){
   var noSleep = new NoSleep();
   noSleep.enable();
@@ -73,6 +78,9 @@ function startRec(){
   rec_time = [];
   rec_value = [];
   rec_flag = 1;
+  timer_count = 0;
+  document.getElementById("timer").innerHTML = "0";
+  timerID = setInterval('countup()',1000);
   $("#rec_button").off();
   $("#rec_button").click(function(){stopRec();});
   document.getElementById("rec_Content").innerHTML = "Stop Rec";
@@ -82,6 +90,9 @@ function startRec(){
 function stopRec(){
   console.log("rec_stop")
   rec_flag = 0;
+  clearInterval(timerID);
+  timer_count = 0;
+  document.getElementById("timer").innerHTML = "";
   $("#rec_button").off();
   $("#rec_button").click(function(){startRec();});
   document.getElementById("rec_Content").innerHTML = "Start Rec";
@@ -115,14 +126,15 @@ function downloadCSV() {
         (window.URL || window.webkitURL).revokeObjectURL(url);
     }
   }
-
 }
 
 function layout(){
   var ww = window.innerWidth;
   var hh = window.innerHeight;
   var data_size = parseInt(Math.min(ww,hh)*0.3);
+  var timer_size = parseInt(Math.min(ww,hh)*0.05);
   var circle_size = parseInt(Math.min(ww,hh)*0.8);
   $('#data_text').css({'font-size':data_size+'px'});
+  $('#timer').css({'font-size':timer_size+'px'});
   $('#data_circle').css({'width':circle_size+'px','height':circle_size+'px'});
 }

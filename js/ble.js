@@ -8,6 +8,8 @@ var min_sens = 0;
 var max_sens = 100;
 var calib_flag = 0;
 var rec_flag = 0;
+var timer_count = 0;
+var timerID;
 
 function getValueList(value){
     var vl = [];
