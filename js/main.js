@@ -71,7 +71,8 @@ function startRec(){
   rec_time = [];
   rec_value = [];
   rec_flag = 1;
-  $("#rec_button").on('click',function(){stopRec();});
+  $("#rec_button").off();
+  $("#rec_button").click(function(){stopRec();});
   document.getElementById("rec_Content").innerHTML = "Stop Rec";
   $('#rec_modalArea').fadeOut();
 }
@@ -79,7 +80,8 @@ function startRec(){
 function stopRec(){
   console.log("stop")
   rec_flag = 0;
-  $("#rec_button").on('click',function(){startRec();});
+  $("#rec_button").off();
+  $("#rec_button").click(function(){startRec();});
   document.getElementById("rec_Content").innerHTML = "Start Rec";
   $('#rec_modalArea').fadeOut();
 }
