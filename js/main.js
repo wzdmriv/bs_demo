@@ -44,7 +44,9 @@ function open_calib(){
 }
 
 function start_calib(){
+  sens_value_calib = []
   calib_flag = 1;
+  document.getElementById("startcalib_button").value = "Restart";
   var calib = function(){
     calib_flag = 0;
     const aryMax = function (a, b) {return Math.max(a, b);}
@@ -67,7 +69,7 @@ function openRec(){
 }
 
 function startRec(){
-  console.log("start")
+  console.log("rec_start")
   rec_time = [];
   rec_value = [];
   rec_flag = 1;
@@ -78,7 +80,7 @@ function startRec(){
 }
 
 function stopRec(){
-  console.log("stop")
+  console.log("rec_stop")
   rec_flag = 0;
   $("#rec_button").off();
   $("#rec_button").click(function(){startRec();});
