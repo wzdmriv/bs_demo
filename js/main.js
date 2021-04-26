@@ -95,7 +95,7 @@ function stopRec(){
   document.getElementById("timer").innerHTML = "";
   $("#rec_button").off();
   $("#rec_button").click(function(){startRec();});
-  document.getElementById("rec_Content").innerHTML = "Start Rec";
+  document.getElementById("rec_Content").innerHTML = "Start Rec <br><br> latest data will be discarded";
   $('#rec_modalArea').fadeOut();
 }
 

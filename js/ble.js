@@ -59,7 +59,8 @@ function getValueList(value){
                 var hour = time_temp.getHours();
                 var min = time_temp.getMinutes();
                 var sec = time_temp.getSeconds();
-                rec_time_jst.push(hour+":"+min+":"+sec+":");
+                var milli = time_temp.getMilliseconds();
+                rec_time_jst.push(hour+":"+min+":"+sec+":"+String(milli).slice(0,2));
             }
         }
     }
