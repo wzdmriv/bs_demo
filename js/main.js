@@ -100,16 +100,14 @@ function stopRec(){
 }
 
 function downloadCSV() {
-  console.log(rec_time)
-  console.log(rec_value)
-  if (!rec_time.length===rec_value.length || rec_time.length===0){
+  if (!(rec_time.length===rec_value.length&&rec_time.length===rec_ac_value.length&&rec_time.length===rec_time_jst.length) || rec_time.length===0){
     alert("data error!")
   }else{
     const filename = "data.csv";
-    var data = "time, data\n";
+    var data = "time, jsttime, acdata, data\n";
     var rec_temp = [];
     for (let i=0; i<rec_time.length; i++){
-      rec_temp.push(String(rec_time[i])+","+String(rec_value[i]));
+      rec_temp.push(String(rec_time[i])+","+String(rec_time_jst[i])+","+String(rec_ac_value[i])+","+String(rec_value[i]));
     }
     data = data + rec_temp.join("\n");
     const bom = new Uint8Array([0xef, 0xbb, 0xbf]);
@@ -126,6 +124,10 @@ function downloadCSV() {
         (window.URL || window.webkitURL).revokeObjectURL(url);
     }
   }
+  rec_time = [];
+  rec_time_jst = [];
+  rec_ac_value = [];
+  rec_value = [];
 }
 
 function layout(){

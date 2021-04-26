@@ -1,5 +1,7 @@
 var rec_value = [];
+var rec_ac_value = [];
 var rec_time = [];
+var rec_time_jst = [];
 var sens_value_calib = [];
 var vent_value = [];
 var amp_value = [];
@@ -16,14 +18,15 @@ function getValueList(value){
     var vl16 = [];
     var vlsens = [];
     var sens_value_temp = [];
+    var temp = 0;
     const buffer = value.buffer;
     vl = new Uint8Array(buffer);
     for (let i=0; i<vl.length; i++){
-        var temp = vl[i].toString(16);
-        if (temp.length==1){
-            temp = '0' + temp
+        var temp_16 = vl[i].toString(16);
+        if (temp_16.length==1){
+            temp_16 = '0' + temp_16
         }
-        vl16.push(temp);
+        vl16.push(temp_16);
     }
 
     for (let j=1; j<vl.length/2-2; j++){
@@ -40,26 +43,23 @@ function getValueList(value){
         }else{
             if (vlsens[k]>=8192){
                 temp = vlsens[k] - 16384;
-                temp = (temp-min_sens)*100/(max_sens-min_sens);
-                sens_value_temp.push(Math.round(temp));
-                if (calib_flag===1){
-                    sens_value_calib.push(temp);
-                }else if(rec_flag===1){
-                    rec_value.push(temp);
-                    var time_temp = new Date();
-                    rec_time.push(time_temp.getTime());
-                }
             }else{
                 temp = vlsens[k];
-                temp = (temp-min_sens)*100/(max_sens-min_sens);
-                sens_value_temp.push(Math.round(temp));
-                if (calib_flag===1){
-                    sens_value_calib.push(temp);
-                }else if(rec_flag===1){
-                    rec_value.push(temp);
-                    var time_temp = new Date();
-                    rec_time.push(time_temp.getTime());
-                }
+            }
+            temp2 = (temp-min_sens)*100/(max_sens-min_sens);
+            sens_value_temp.push(Math.round(temp2));
+            if (calib_flag===1){
+                sens_value_calib.push(temp);
+            }
+            if(rec_flag===1){
+                rec_ac_value.push(temp);
+                rec_value.push(temp2);
+                var time_temp = new Date();
+                rec_time.push(time_temp.getTime());
+                var hour = time_temp.getHours();
+                var min = time_temp.getMinutes();
+                var sec = time_temp.getSeconds();
+                rec_time_jst.push(hour+":"+min+":"+sec+":");
             }
         }
     }
@@ -83,6 +83,9 @@ function getAC(value){
     return result;
 }
 
+function resetDevice(){
+    ble.reset();
+}
 
 function startNotify() {
     ble.startNotify('UUID1');
@@ -100,13 +103,14 @@ ble.onScan = function (deviceName) {
 ble.onConnectGATT = function (uuid) {
     console.log('> connected GATT!');
 }
-
 ble.onStartNotify = function(uuid){
     console.log('> Start Notify!');
 }
-
 ble.onStopNotify = function(uuid){
     console.log('> Stop Notify!');
+}
+ble.onReset = function() {
+    ble.startNotify('UUID1');
 }
 
 ble.onRead = function (data, uuid){
