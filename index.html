@@ -10,6 +10,7 @@
         <script type="text/javascript" src="js/jquery-3.6.0.min.js"></script>
         <script type="text/javascript" src="js/bluejelly.js"></script>
         <script type="text/javascript" src="js/NoSleep.min.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript" src="js/ble.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
     </head>
@@ -17,6 +18,12 @@
     <body>
         <div class="swiper-container">
             <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div id="dashboard_div" style='width:100%; height:100%;'>
+                        <div id="chart_div" style='width:100%; height: 80%;'></div>
+                        <div id="filter_div" style='width:100%; height: 10%;'></div>
+                    </div>
+                </div>
                 <div class="swiper-slide">
                     <div id="data_text" onclick="openRec()">0</div>
                     <div id="timer"></div>
@@ -87,8 +94,8 @@
             </div>
         </section>
 
-
+        <script type="text/javascript" src="js/chart.js"></script>
         <script type="text/javascript" src="js/swiper-bundle.min.js"></script>
-        <script>var swiper = new Swiper('.swiper-container', {pagination: {el:'.swiper-pagination'}});</script>
+        <script>var swiper = new Swiper('.swiper-container', {initialSlide: 1, pagination: {el:'.swiper-pagination'}, noSwipingSelector: 'div#filter_div'});</script>
     </body>
 </html>

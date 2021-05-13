@@ -12,6 +12,9 @@ var calib_flag = 0;
 var rec_flag = 0;
 var timer_count = 0;
 var timerID;
+var chart_start = 0;
+var chart_end = 10;
+var chart_flag = 0;
 
 function getValueList(value){
     var vl = [];
