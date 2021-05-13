@@ -8,7 +8,7 @@ var labels = [];
 var colors = [];
 
 for (i = 0; i < 15; i += 1) {
-  [12, 19, 3, 5, 2, 3].forEach(x => { data.push(x); });
+  [-12, 19, 3, 5, 2, 3].forEach(x => { data.push(x); });
   ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'].forEach(x => { labels.push(x); });
   [ 'rgb(255, 99, 132)',
     'rgb(54, 162, 235)',
