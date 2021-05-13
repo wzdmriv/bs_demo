@@ -13,16 +13,27 @@
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript" src="js/ble.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
     </head>
 
     <body>
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <div id="dashboard_div" style='width:100%; height:100%;'>
-                        <div id="chart_div" style='width:100%; height: 80%;'></div>
-                        <div id="filter_div" style='width:100%; height: 10%;'></div>
-                    </div>
+                    <div class="scrollableChartWrapper">
+                        <!-- スクロールされる canvas を持つ div:
+                             - style.width を省略すると div の幅がページ幅に合わせられる;
+                             - style.width を指定すると div の幅（≒スクロールバーの長さ）が固定される -->
+                        <div>
+                          <!-- グラフ描画用 canvas:
+                               - style.height は必須;
+                               - style.width は JS によって設定する;
+                               - width,height は Chart により設定される -->
+                          <canvas id="chart" style="height: 250px"></canvas>
+                        </div>
+                        <!-- Y軸イメージコピー用 canvas: {style.,}{height,width} は JS によって設定する -->
+                        <canvas id="yAxis" width="0"></canvas>
+                      </div>
                 </div>
                 <div class="swiper-slide">
                     <div id="data_text" onclick="openRec()">0</div>
@@ -93,8 +104,8 @@
                 </div>
             </div>
         </section>
-
-        <script type="text/javascript" src="js/chart.js"></script>
+        
+        <script type="text/javascript" src="js/chart1.js"></script>
         <script type="text/javascript" src="js/swiper-bundle.min.js"></script>
         <script>var swiper = new Swiper('.swiper-container', {initialSlide: 1, pagination: {el:'.swiper-pagination'}, noSwipingSelector: 'div#filter_div'});</script>
     </body>
