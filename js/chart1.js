@@ -40,8 +40,8 @@ var copyYAxisCalled = false;
 // Y軸イメージのコピー関数
 function copyYAxisImage(chart) {
   //console.log("copyYAxisCalled="+copyYAxisCalled);
-
   if (copyYAxisCalled) return;
+  cvsChart.style.width = chartWidth + "px";
 
   copyYAxisCalled = true;
 
@@ -92,30 +92,34 @@ function copyYAxisImage(chart) {
 
   // グラフcanvasからY軸部分のイメージをコピーする
   ctxYAxis.drawImage(cvsChart, 0, 0, copyWidth, copyHeight, 0, 0, copyWidth, copyHeight);
-
   // 軸ラベルのフォント色を透明に変更して、以降、再表示されても見えないようにする
-  chart.options.scales.yAxes[0].ticks.fontColor = 'rgba(0,0,0,0)';
+  //chart.options.scales.yAxes[0].ticks.fontColor = 'rgba(0,0,0,0)';
   chart.update();
   // 最初に描画されたグラフのY軸ラベル部分をクリアする
-  ctxChart.clearRect(0, 0, yAxisStyleWidth, yAxisStyleHeight);
+  //ctxChart.clearRect(0, 0, yAxisStyleWidth, yAxisStyleHeight);
+  copyYAxisCalled = false;
 }
 
 // グラフ描画
 var myChart = new Chart(ctxChart, {
-    type: 'bar',
+    type: 'line',
     data: {
       labels: labels,
         datasets: [{
             label: '# of Votes',
             data: data,
-            backgroundColor: colors,
             borderColor: colors,
         }]
     },
     options: {
       responsive: false,  // true（デフォルト）にすると画面の幅に合わせてしまう
+      animation: false,
+      legend: {
+        display: false
+     },
       scales: {
         yAxes: [{
+            display: true, 
           ticks: {
             beginAtZero: true
           }
@@ -129,3 +133,59 @@ var myChart = new Chart(ctxChart, {
       afterRender: copyYAxisImage
     }]
 });
+
+$(function(){
+    setInterval(function(){
+        data.push(5);
+        labels.push('blue');
+        chartWidth = data.length * xAxisStepSize;
+        cvsChart.width = chartWidth;
+        var myChart = new Chart(ctxChart, {
+            type: 'line',
+            data: {
+              labels: labels,
+                datasets: [{
+                    label: '# of Votes',
+                    data: data,
+                    borderColor: colors,
+                }]
+            },
+            options: {
+              responsive: false,  // true（デフォルト）にすると画面の幅に合わせてしまう
+              animation: false,
+              legend: {
+                display: false
+             },
+              scales: {
+                yAxes: [{
+                    display: true, 
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }]
+              }
+            },
+            plugins: [{
+              // 描画完了後に copyYAxisImage() を呼び出す
+              // see https://www.chartjs.org/docs/latest/developers/plugins.html
+              //     https://stackoverflow.com/questions/55416218/what-is-the-order-in-which-the-hooks-plugins-of-chart-js-are-executed
+              afterRender: copyYAxisImage
+            }]
+        });
+        var scr = document.getElementById("chart_scroll");
+        var width = scr.offsetWidth;
+        var scrollPosition = scr.scrollLeft;
+        var scrollWidth = scr.scrollWidth;
+        if(scrollWidth-(width+scrollPosition)<50){
+            scr.scrollLeft = scrollWidth;
+        }
+    },1000);
+});
+
+
+// 現在の縦スクロール位置
+var scrollPosition = document.getElementById("chart_scroll").scrollLeft;
+// スクロール要素の高さ
+var scrollWidth = document.getElementById("chart_scroll").scrollWidth;
+console.log(scrollWidth)
+document.getElementById("chart_scroll").scrollLeft = scrollWidth;

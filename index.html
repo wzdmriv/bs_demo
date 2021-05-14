@@ -21,17 +21,9 @@
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
                     <div class="scrollableChartWrapper"id="scrollableChartWrapper">
-                        <!-- スクロールされる canvas を持つ div:
-                             - style.width を省略すると div の幅がページ幅に合わせられる;
-                             - style.width を指定すると div の幅（≒スクロールバーの長さ）が固定される -->
-                        <div>
-                          <!-- グラフ描画用 canvas:
-                               - style.height は必須;
-                               - style.width は JS によって設定する;
-                               - width,height は Chart により設定される -->
-                          <canvas id="chart" style="height: 250px"></canvas>
+                        <div id="chart_scroll">
+                          <canvas id="chart" style="height: 500px;"></canvas>
                         </div>
-                        <!-- Y軸イメージコピー用 canvas: {style.,}{height,width} は JS によって設定する -->
                         <canvas id="yAxis" width="0"></canvas>
                       </div>
                 </div>
@@ -107,6 +99,6 @@
 
         <script type="text/javascript" src="js/chart1.js"></script>
         <script type="text/javascript" src="js/swiper-bundle.min.js"></script>
-        <script>var swiper = new Swiper('.swiper-container', {initialSlide: 1, pagination: {el:'.swiper-pagination'}, noSwipingSelector: 'div#scrollableChartWrapper'});</script>
+        <script>var swiper = new Swiper('.swiper-container', {initialSlide: 0, pagination: {el:'.swiper-pagination'}, noSwipingSelector: 'div#scrollableChartWrapper'});</script>
     </body>
 </html>
