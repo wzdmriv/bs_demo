@@ -11,6 +11,8 @@ var options = {
             scrollPositionX: 1
         }
     },
+    credits: { enabled: false },
+    tooltip: { enabled: false },
     title: false,
     xAxis: {
         type: 'datetime',

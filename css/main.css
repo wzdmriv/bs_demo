@@ -143,6 +143,6 @@ input[type="button"]:hover {
 #container {
     max-width: 800px;
     min-width: 320px;
-    height: 400px;
-    width: 400px;
+    height: 70%;
+    width: 100%;
 }
