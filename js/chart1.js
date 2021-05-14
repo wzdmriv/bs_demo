@@ -68,17 +68,6 @@ function copyYAxisImage(chart) {
   // Y軸canvas の高さ
   var yAxisCvsHeight = copyHeight;
 
-  console.log("After chart canvas width=" + cvsChart.width);
-  console.log("After chart canvas height=" + cvsChart.height);
-  console.log("scale="+scale);
-  console.log("copyWidth="+copyWidth);
-  console.log("copyHeight="+copyHeight);
-  console.log("yAxisCvsWidth="+yAxisCvsWidth);
-  console.log("yAxisCvsHeight="+yAxisCvsHeight);
-  console.log("yAxisStyleWidth0="+yAxisStyleWidth0);
-  console.log("yAxisStyleWidth="+yAxisStyleWidth);
-  console.log("yAxisStyleHeight="+yAxisStyleHeight);
-
   // 下記はやってもやらなくても結果が変わらないっぽい
   //ctxYAxis.scale(scale, scale);
 
@@ -106,7 +95,7 @@ var myChart = new Chart(ctxChart, {
     data: {
       labels: labels,
         datasets: [{
-            label: '# of Votes',
+            label: '#',
             data: data,
             borderColor: colors,
         }]
@@ -136,16 +125,17 @@ var myChart = new Chart(ctxChart, {
 
 $(function(){
     setInterval(function(){
-        data.push(5);
         labels.push('blue');
+        data.push(5);
         chartWidth = data.length * xAxisStepSize;
         cvsChart.width = chartWidth;
-        var myChart = new Chart(ctxChart, {
+        myChart = null;
+        myChart = new Chart(ctxChart, {
             type: 'line',
             data: {
               labels: labels,
                 datasets: [{
-                    label: '# of Votes',
+                    label: '# ',
                     data: data,
                     borderColor: colors,
                 }]

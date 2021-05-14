@@ -140,22 +140,9 @@ input[type="button"]:hover {
     background-color: #fff;
 }
 
-
-
-.scrollableChartWrapper {
-    position: relative;
-    background-color: ghostwhite;
-    width: 100%;
-}
-
-.scrollableChartWrapper > div {
-position: relative;
-overflow-x: scroll;
-}
-
-.scrollableChartWrapper > canvas {
-position: absolute;
-left: 0;
-top: 0;
-background-color: ghostwhite;
+#container {
+    max-width: 800px;
+    min-width: 320px;
+    height: 400px;
+    width: 400px;
 }

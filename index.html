@@ -13,19 +13,14 @@
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script type="text/javascript" src="js/ble.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
     </head>
 
     <body>
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <div class="scrollableChartWrapper"id="scrollableChartWrapper">
-                        <div id="chart_scroll">
-                          <canvas id="chart" style="height: 500px;"></canvas>
-                        </div>
-                        <canvas id="yAxis" width="0"></canvas>
-                      </div>
+                    <div id="container"></div>
                 </div>
                 <div class="swiper-slide">
                     <div id="data_text" onclick="openRec()">0</div>
@@ -97,8 +92,8 @@
             </div>
         </section>
 
-        <script type="text/javascript" src="js/chart1.js"></script>
+        <script type="text/javascript" src="js/chart2.js"></script>
         <script type="text/javascript" src="js/swiper-bundle.min.js"></script>
-        <script>var swiper = new Swiper('.swiper-container', {initialSlide: 0, pagination: {el:'.swiper-pagination'}, noSwipingSelector: 'div#scrollableChartWrapper'});</script>
+        <script>var swiper = new Swiper('.swiper-container', {initialSlide: 0, pagination: {el:'.swiper-pagination'}, noSwipingSelector: 'div#container'});</script>
     </body>
 </html>
