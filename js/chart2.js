@@ -26,10 +26,6 @@ var options = {
         lineWidth: 1,
         opposite: true
     },
-    tooltip: {
-        valueSuffix: ' m/s',
-        split: true
-    },
     legend:false,
     plotOptions: {
         spline: {
