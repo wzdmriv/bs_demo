@@ -3,31 +3,24 @@ var data = [0.2, 0.8, 0.8, 0.8, 1, 1.3, 1.5, 2.9, 1.9, 2.6, 1.6, 3, 4, 3.6,
             5.6, 6.1, 5.8, 8.6, 7.2, 9, 10.9, 11.5, 11.6, 11.1, 12, 12.3, 10.7,
             9.4, 9.8, 9.6, 9.8, 9.5, 8.5, 7.4, 7.6]
 
-Highcharts.chart('container', {
+var options = {
     chart: {
         type: 'spline',
         scrollablePlotArea: {
-            minWidth: 1000,
+            minWidth: 20*data.length,
             scrollPositionX: 1
         }
     },
-    title: {
-        text: 'Scrollable plot area'
-    },
-    subtitle: {
-        text: 'Open on mobile and scroll sideways'
-    },
+    title: false,
     xAxis: {
         type: 'datetime',
         labels: {
-            overflow: 'justify'
+            overflow: 'allow'
         }
     },
     yAxis: {
         tickWidth: 1,
-        title: {
-            text: 'Wind speed (m/s)'
-        },
+        title: false,
         lineWidth: 1,
         opposite: true
     },
@@ -35,10 +28,9 @@ Highcharts.chart('container', {
         valueSuffix: ' m/s',
         split: true
     },
-
+    legend:false,
     plotOptions: {
         spline: {
-        		animation: false,
             lineWidth: 4,
             states: {
                 hover: {
@@ -53,71 +45,67 @@ Highcharts.chart('container', {
         }
     },
     series: [{
-        name: 'Hestavollane',
+        name: 'none',
         data: data
 
     }]
-});
+};
+
+
+var chart = new Highcharts.chart('container', options);
+
+var scrflag = 0;
+var scrld_flag = 0;
+
 setInterval(function(){
-data.push(-5.0);
-var scrollPosition = document.querySelector(".highcharts-scrolling").scrollLeft;
-console.log(scrollPosition)
-	Highcharts.chart('container', {
-    chart: {
-        type: 'spline',
-        scrollablePlotArea: {
-            minWidth: 1000,
-            scrollPositionX: 1
-        }
-    },
-    title: {
-        text: 'Scrollable plot area'
-    },
-    subtitle: {
-        text: 'Open on mobile and scroll sideways'
-    },
-    xAxis: {
-        type: 'datetime',
-        labels: {
-            overflow: 'justify'
-        }
-    },
-    yAxis: {
-        tickWidth: 1,
-        title: {
-            text: 'Wind speed (m/s)'
-        },
-        lineWidth: 1,
-        opposite: true
-    },
-    tooltip: {
-        valueSuffix: ' m/s',
-        split: true
-    },
-
-    plotOptions: {
-        spline: {
-        		animation: false,
-            lineWidth: 4,
-            states: {
-                hover: {
-                    lineWidth: 5
+    console.log("fffff"+scrflag)
+    data.push(-5.0);
+    var scr = document.querySelector(".highcharts-scrolling");
+    var width = scr.offsetWidth;
+    var scrollPosition = scr.scrollLeft;
+    var scrollWidth = scr.scrollWidth;
+    console.log(width)
+    console.log(scrollPosition)
+    console.log(scrollWidth)
+    scrld_flag = 0;
+    if(scrollWidth-(width+scrollPosition)<50){
+        scrld_flag = 1;
+    }
+    if (scrflag == 0){
+        chart.update({
+            chart: {
+                type: 'spline',
+                scrollablePlotArea: {
+                    minWidth: 20*data.length,
+                    scrollPositionX: 1
                 }
-            },
-            marker: {
-                enabled: false
-            },
-            pointInterval: 1000, // one hour
-            pointStart: Date.UTC(2015, 4, 31, 0, 0, 0)
+            },series: [{
+                name: 'none',
+                data: data
+        
+            }]
+        })
+        var scr = document.querySelector(".highcharts-scrolling");
+        if(scrld_flag==1){
+            console.log("hello")
+            scr.scrollLeft = scrollPosition+20;
         }
-    },
-    series: [{
-        name: 'Hestavollane',
-        data: data
-
-    }]
-});
-
-
-
+        var isTouch = ('ontouchstart' in window);
+        if(isTouch){
+            document.getElementById("container").touchstart = function() {
+                scrflag = 1;
+            }
+            document.getElementById("container").touchend = function() {
+                scrflag = 0;
+            }
+        }else{
+            document.getElementById("container").mousedown = function() {
+                scrflag = 1;
+            }
+            document.getElementById("container").mouseup = function() {
+                scrflag = 0;
+            }
+        }
+    }
 },1000);
+
