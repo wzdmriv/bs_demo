@@ -82,6 +82,9 @@ function startRec(){
   rec_time_jst = [];
   rec_ac_value = [];
   rec_value = [];
+  rec_x_ac = [];
+  rec_y_ac = [];
+  rec_z_ac = [];
   rec_memo = [];
   rec_flag = 1;
   timer_count = 0;
