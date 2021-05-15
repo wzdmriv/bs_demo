@@ -167,7 +167,7 @@ input[type=text], select, textarea, .field {
 #form1{
     position:relative;
     max-width:270px;
-    width:50%;
+    width:40%;
 }
 #sbox{
     position:absolute;
