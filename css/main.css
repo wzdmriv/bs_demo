@@ -68,6 +68,7 @@ body {
 }
 .swiper-slide:nth-child(4n+1) {
 	background-color: #7FC5DC;
+    z-index: 2;
 }
 .swiper-slide:nth-child(4n+2) {
 	background-color: #5A98BF;

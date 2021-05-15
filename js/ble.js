@@ -15,10 +15,11 @@ var timerID;
 var chart_start = 0;
 var chart_end = 10;
 var chart_flag = 0;
-var data_chart = [0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0
+let data_initial = [0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0
     , 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0
     , 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0
      ,0.0, 0.0, 0.0 ,0.0, 0.0];
+var data_chart = data_initial.concat();
 
 function getValueList(value){
     var vl = [];
@@ -124,11 +125,61 @@ ble.onReset = function() {
 ble.onRead = function (data, uuid){
     value = getValueList(data);
     document.getElementById('data_text').innerHTML = value[value.length-1];
+    data_chart.push(value[value.length-1]);
     var circle_size_temp = value[value.length-1];
     if (circle_size_temp<0){
         circle_size_temp = 0;
     }
     $('#data_circle').css({'-webkit-transform':"scale("+(circle_size_temp/100)+")",'-moz-transform':"scale("+(circle_size_temp/100)+")"});
+    var scr = document.querySelector(".highcharts-scrolling");
+    var width = scr.offsetWidth;
+    var scrollPosition = scr.scrollLeft;
+    var scrollWidth = scr.scrollWidth;
+    scrld_flag = 0;
+    if(scrollWidth-(width+scrollPosition)<50){
+        scrld_flag = 1;
+    }
+    if (scrflag == 0){
+        chart.update({
+            chart: {
+                type: 'spline',
+                scrollablePlotArea: {
+                    minWidth: 20*data_chart.length,
+                    scrollPositionX: 1
+                }
+            },
+            series: [{
+                name: 'none',
+                data: data_chart
+        
+            }],
+            plotOptions: {
+                spline: {
+                    pointStart: (now_time)
+                }
+            },
+        })
+        var scr = document.querySelector(".highcharts-scrolling");
+        if(scrld_flag==1){
+            scr.scrollLeft = scrollPosition+20;
+        }
+        var isTouch = ('ontouchstart' in window);
+        if(isTouch){
+            document.getElementById("container").touchstart = function() {
+                scrflag = 1;
+            }
+            document.getElementById("container").touchend = function() {
+                scrflag = 0;
+            }
+        }else{
+            document.getElementById("container").mousedown = function() {
+                scrflag = 1;
+            }
+            document.getElementById("container").mouseup = function() {
+                scrflag = 0;
+            }
+        }
+    }
 }
 window.onload = function () {
     ble.setUUID("UUID1",   "0000180d-0000-1000-8000-00805f9b34fb", "00002a37-0000-1000-8000-00805f9b34fb");

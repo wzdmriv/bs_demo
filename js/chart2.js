@@ -1,3 +1,4 @@
+var now_time = Date.now() + 1000*60*60*9 - 1000*data_chart.length;
 var options = {
     chart: {
         type: 'spline',
@@ -33,8 +34,8 @@ var options = {
             marker: {
                 enabled: false
             },
-            pointInterval: 1000, // one hour
-            pointStart: new Date(new Date().toLocaleString({ timeZone: 'Asia/Tokyo' })).getTime()
+            pointInterval: 1000,
+            pointStart: (now_time)
         }
     },
     series: [{
@@ -50,16 +51,13 @@ var chart = new Highcharts.chart('container', options);
 var scrflag = 0;
 var scrld_flag = 0;
 
+/*
 setInterval(function(){
-    console.log("fffff"+scrflag)
     data_chart.push(-5.0);
     var scr = document.querySelector(".highcharts-scrolling");
     var width = scr.offsetWidth;
     var scrollPosition = scr.scrollLeft;
     var scrollWidth = scr.scrollWidth;
-    console.log(width)
-    console.log(scrollPosition)
-    console.log(scrollWidth)
     scrld_flag = 0;
     if(scrollWidth-(width+scrollPosition)<50){
         scrld_flag = 1;
@@ -72,15 +70,20 @@ setInterval(function(){
                     minWidth: 20*data_chart.length,
                     scrollPositionX: 1
                 }
-            },series: [{
+            },
+            series: [{
                 name: 'none',
                 data: data_chart
         
-            }]
+            }],
+            plotOptions: {
+                spline: {
+                    pointStart: (now_time)
+                }
+            },
         })
         var scr = document.querySelector(".highcharts-scrolling");
         if(scrld_flag==1){
-            console.log("hello")
             scr.scrollLeft = scrollPosition+20;
         }
         var isTouch = ('ontouchstart' in window);
@@ -101,4 +104,4 @@ setInterval(function(){
         }
     }
 },1000);
-
+*/

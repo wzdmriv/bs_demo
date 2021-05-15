@@ -62,6 +62,9 @@ function start_calib(){
       max_sens = sens_value_calib.reduce(aryMax);
       min_sens = sens_value_calib.reduce(aryMin);
       sens_value_calib = []
+      data_chart = data_initial.concat();
+      now_time = Date.now() + 1000*60*60*9 - 1000*data_chart.length;
+      console.log(data_chart)
       $('#startcalib_modalArea').fadeOut();
     }
   };
