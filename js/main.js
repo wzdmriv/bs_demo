@@ -79,7 +79,10 @@ function openRec(){
 function startRec(){
   console.log("rec_start")
   rec_time = [];
+  rec_time_jst = [];
+  rec_ac_value = [];
   rec_value = [];
+  rec_memo = [];
   rec_flag = 1;
   timer_count = 0;
   document.getElementById("timer").innerHTML = "0";
@@ -107,10 +110,10 @@ function downloadCSV() {
     alert("data error!")
   }else{
     const filename = "data.csv";
-    var data = "time, jsttime, acdata, data\n";
+    var data = "time, jsttime, rawdata, data, x-ac, y-ac, z-ac, memo\n";
     var rec_temp = [];
     for (let i=0; i<rec_time.length; i++){
-      rec_temp.push(String(rec_time[i])+","+String(rec_time_jst[i])+","+String(rec_ac_value[i])+","+String(rec_value[i]));
+      rec_temp.push(String(rec_time[i])+","+String(rec_time_jst[i])+","+String(rec_ac_value[i])+","+String(rec_value[i])+","+String(rec_x_ac[i])+","+String(rec_y_ac[i])+","+String(rec_z_ac[i])+","+String(rec_memo[i]));
     }
     data = data + rec_temp.join("\n");
     const bom = new Uint8Array([0xef, 0xbb, 0xbf]);
@@ -131,6 +134,10 @@ function downloadCSV() {
   rec_time_jst = [];
   rec_ac_value = [];
   rec_value = [];
+  rec_x_ac = [];
+  rec_y_ac = [];
+  rec_z_ac = [];
+  rec_memo = [];
 }
 
 function layout(){

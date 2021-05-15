@@ -2,6 +2,11 @@ var rec_value = [];
 var rec_ac_value = [];
 var rec_time = [];
 var rec_time_jst = [];
+var rec_memo = [];
+var rec_x_ac = [];
+var rec_y_ac = [];
+var rec_z_ac = [];
+var memo_temp = "";
 var sens_value_calib = [];
 var vent_value = [];
 var amp_value = [];
@@ -60,6 +65,14 @@ function getValueList(value){
                 sens_value_calib.push(temp);
             }
             if(rec_flag===1){
+                console.log(memo_temp)
+                if (memo_temp == ""){
+                    rec_memo.push("");
+                }else{
+                    rec_memo.push(memo_temp);
+                    memo_temp = "";
+                }
+                console.log(rec_memo)
                 rec_ac_value.push(temp);
                 rec_value.push(temp2);
                 var time_temp = new Date();
@@ -69,15 +82,18 @@ function getValueList(value){
                 var sec = time_temp.getSeconds();
                 var milli = time_temp.getMilliseconds();
                 rec_time_jst.push(hour+":"+min+":"+sec+":"+String(milli).slice(0,2));
+                var x_ac = getAC(vl16[vl16.length-4]);
+                var y_ac = getAC(vl16[vl16.length-2]);
+                var z_ac = getAC(vl16[vl16.length-3][1]+vl16[vl16.length-1][1]);
+                rec_x_ac.push(x_ac);
+                rec_y_ac.push(y_ac);
+                rec_z_ac.push(z_ac);
+
+                //console.log("x_ac:"+x_ac+",y_ac:"+y_ac+",z_ac:"+z_ac)
             }
         }
     }
-
-    var x_ac = getAC(vl16[vl16.length-4]);
-    var y_ac = getAC(vl16[vl16.length-2]);
-    var z_ac = getAC(vl16[vl16.length-3][1]+vl16[vl16.length-1][1]);
-    console.log("x_ac:"+x_ac+",y_ac:"+y_ac+",z_ac:"+z_ac)
-    console.log(sens_value_temp)
+    //console.log(sens_value_temp)
     return sens_value_temp;
 }
 
@@ -185,4 +201,10 @@ window.onload = function () {
     ble.setUUID("UUID1",   "0000180d-0000-1000-8000-00805f9b34fb", "00002a37-0000-1000-8000-00805f9b34fb");
     layout()
     $(window).resize(layout);
+    var memo_btn = document.getElementById('sbtn');
+    memo_btn.addEventListener('click', function() {
+        memo_temp = document.getElementById("sbox").value;
+        console.log(memo_temp)
+        document.getElementById("sbox").value = "";
+    })
 }
