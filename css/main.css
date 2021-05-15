@@ -110,7 +110,6 @@ input[type="button"]:hover {
 input[type=text], select, textarea, .field {
     display: block;
     width: 100%;
-    margin-bottom: .7em;
     border: 0;
     box-shadow: none;
     color: rgba(0,0,0,.7);
@@ -159,7 +158,7 @@ input[type=text], select, textarea, .field {
 
 
 #form_wrapper {
-    top: 0px;
+    bottom: 0px;
     width:100%;
     position:fixed;
     z-index: 3;
@@ -172,7 +171,6 @@ input[type=text], select, textarea, .field {
 #sbox{
     position:absolute;
     left:0;
-    top:50px; 	
     outline:0;
     height:50px;
     padding:0 10px;
@@ -185,7 +183,6 @@ input[type=text], select, textarea, .field {
     height:50px;
     position:absolute;
     left:270px;
-    top:50px;
     border-radius:0 2px 2px 0;
     background:#7fbfff;
     border:none;

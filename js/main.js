@@ -32,7 +32,7 @@ $(function () {
 
 function countup() {
 	timer_count++;
-	document.getElementById("timer").innerHTML = timer_count;
+	document.getElementById("timer").innerHTML = "Time:"+timer_count;
 }
 
 function close_startmodal(){
@@ -88,7 +88,7 @@ function startRec(){
   rec_memo = [];
   rec_flag = 1;
   timer_count = 0;
-  document.getElementById("timer").innerHTML = "0";
+  document.getElementById("timer").innerHTML = "Time:0";
   timerID = setInterval('countup()',1000);
   $("#rec_button").off();
   $("#rec_button").click(function(){stopRec();});
@@ -153,8 +153,8 @@ function layout(){
   var circle_size = parseInt(size*0.8);
   var memow =  document.getElementById('sbox').clientWidth;
   $('#data_text').css({'font-size':data_size+'px'});
-  $('#timer').css({'font-size':timer_size+'px','bottom':timer_bottom+'px'});
+  $('#timer').css({'font-size':timer_size+'px','top':(timer_bottom+60)+'px'});
   $('#data_circle').css({'width':circle_size+'px','height':circle_size+'px'});
-  $('#sbox').css({'left':(ww-memow-60)/2+'px'});
-  $('#sbtn').css({'left':(ww+memow-60)/2+'px'});
+  $('#sbox').css({'left':(ww-memow-60)/2+'px','bottom':timer_bottom+'px'});
+  $('#sbtn').css({'left':(ww+memow-60)/2+'px','bottom':timer_bottom+'px'});
 }
