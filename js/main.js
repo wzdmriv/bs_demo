@@ -155,5 +155,6 @@ function layout(){
   $('#data_text').css({'font-size':data_size+'px'});
   $('#timer').css({'font-size':timer_size+'px','bottom':timer_bottom+'px'});
   $('#data_circle').css({'width':circle_size+'px','height':circle_size+'px'});
-  $('#sbtn').css({'left':(memow-60)+'px'});
+  $('#sbox').css({'left':(ww-memow-60)/2+'px'});
+  $('#sbtn').css({'left':(ww+memow-60)/2+'px'});
 }
