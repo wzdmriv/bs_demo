@@ -168,6 +168,7 @@ input[type=text], select, textarea, .field {
 #form1{
     position:relative;
     max-width:270px;
+    width:50%;
     margin-top:15px;
     margin: 0 auto;
     padding:38px;		
@@ -184,7 +185,7 @@ input[type=text], select, textarea, .field {
 }
     
 #sbtn{
-    width:70px;
+    width:60px;
     height:50px;
     position:absolute;
     left:270px;

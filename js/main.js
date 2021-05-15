@@ -151,7 +151,9 @@ function layout(){
   var timer_size = parseInt(size*0.07);
   var timer_bottom = parseInt(size*0.1);
   var circle_size = parseInt(size*0.8);
+  var memow =  document.getElementById('sbox').clientWidth;
   $('#data_text').css({'font-size':data_size+'px'});
   $('#timer').css({'font-size':timer_size+'px','bottom':timer_bottom+'px'});
   $('#data_circle').css({'width':circle_size+'px','height':circle_size+'px'});
+  $('#sbtn').css({'left':(memow-60)+'px'});
 }
