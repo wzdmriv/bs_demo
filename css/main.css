@@ -147,6 +147,15 @@ input[type="button"]:hover {
     color: #fff;
     background: #000;
 }
+input[type="button"].menu_button {
+    width:20%;
+    max-width: 150px;
+    padding:0;
+    background: #eee;
+    color: rgba(0,0,0,.7);
+    font-size: 1em;
+    line-height: 1.5;
+}
 
 
 input[type=text], select, textarea, .field {
