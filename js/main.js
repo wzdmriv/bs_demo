@@ -146,15 +146,20 @@ function downloadCSV() {
 function layout(){
   var ww = window.innerWidth;
   var hh = window.innerHeight;
-  var size = Math.min(ww,hh);
+  var dww = document.getElementById('data_text-wrapper').clientWidth;
+  var dhh = document.getElementById('data_text-wrapper').clientHeight;
+  var ddhh = document.getElementById('data_text').clientHeight;
+  var thh = document.getElementById('timer-wrapper').clientHeight;
+  var tthh = document.getElementById('timer').clientHeight;
+  var size = Math.min(dww,dhh*2);
   var data_size = parseInt(size*0.35);
-  var timer_size = parseInt(size*0.07);
   var timer_bottom = parseInt(size*0.1);
   var circle_size = parseInt(size*0.8);
   var memow =  document.getElementById('sbox').clientWidth;
-  $('#data_text').css({'font-size':data_size+'px'});
-  $('#timer').css({'font-size':timer_size+'px','top':(timer_bottom+60)+'px'});
+  $('#data_text').css({'font-size':data_size+'px', 'top':(dhh-ddhh)/2+'px'});
+  $('#timer').css({'font-size':thh*0.5+'px', 'top':(thh-tthh)/2+'px'});
   $('#data_circle').css({'width':circle_size+'px','height':circle_size+'px'});
-  $('#sbox').css({'left':(ww-memow-60)/2+'px','bottom':timer_bottom+'px'});
-  $('#sbtn').css({'left':(ww+memow-60)/2+'px','bottom':timer_bottom+'px'});
+  //$('#form1').css({'bottom':timer_bottom+'px'});
+  $('#sbox').css({'left':(ww-memow-60)/2+'px'});
+  $('#sbtn').css({'left':(ww+memow-60)/2+'px'});
 }
