@@ -20,11 +20,19 @@ var timerID;
 var chart_start = 0;
 var chart_end = 10;
 var chart_flag = 0;
-let data_initial = [0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0
-    , 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0
-    , 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0 ,0.0, 0.0, 0.0
-     ,0.0, 0.0, 0.0 ,0.0, 0.0];
-var data_chart = data_initial.concat();
+function data_init(nowtime){
+    var temp_init_data = [];
+    for (i=0; i<70; i++){
+        temp_init_data.push([nowtime-(70-i)*1000,0.0]);
+    }
+    return temp_init_data;
+}
+function now_time(){
+    return Date.now() + 1000*60*60*9;
+    // - 1000*data_chart.length;
+}
+//let data_initial = [];
+var data_chart=data_init(now_time());
 
 function getValueList(value){
     var vl = [];
@@ -49,10 +57,10 @@ function getValueList(value){
     for (let k=0; k<vlsens.length; k++){
         if (vlsens[k]>=24576){
             temp= vlsens[k]-24576;
-            amp_value.push(temp);
+            //amp_value.push(temp);
         }else if(vlsens[k]>=16384){
             temp= vlsens[k]-16384;
-            vent_value.push(temp);
+            //vent_value.push(temp);
         }else{
             if (vlsens[k]>=8192){
                 temp = vlsens[k] - 16384;
@@ -93,7 +101,7 @@ function getValueList(value){
             }
         }
     }
-    //console.log(sens_value_temp)
+    console.log(sens_value_temp)
     return sens_value_temp;
 }
 
@@ -139,9 +147,18 @@ ble.onReset = function() {
 }
 
 ble.onRead = function (data, uuid){
+    var now_time_temp = now_time();
     value = getValueList(data);
+    var value_temp = value[value.length-1];
     document.getElementById('data_text').innerHTML = value[value.length-1];
-    data_chart.push(value[value.length-1]);
+    
+    console.log([now_time(),value[value.length-1]])
+    data_chart.push([now_time_temp,value_temp]);
+    while (data_chart.length>600){
+        data_chart.shift();
+    }
+    console.log("hello")
+    console.log(data_chart)
     var circle_size_temp = value[value.length-1];
     if (circle_size_temp<0){
         circle_size_temp = 0;
@@ -169,34 +186,21 @@ ble.onRead = function (data, uuid){
                 data: data_chart
         
             }],
-            plotOptions: {
+            /*plotOptions: {
                 spline: {
-                    pointStart: (now_time)
+                    pointStart: (Date.now() + 1000*60*60*9 - 1000*data_chart.length)
                 }
-            },
+            },*/
         })
         var scr = document.querySelector(".highcharts-scrolling");
         if(scrld_flag==1){
             scr.scrollLeft = scrollPosition+20;
         }
-        var isTouch = ('ontouchstart' in window);
-        if(isTouch){
-            document.getElementById("container").touchstart = function() {
-                scrflag = 1;
-            }
-            document.getElementById("container").touchend = function() {
-                scrflag = 0;
-            }
-        }else{
-            document.getElementById("container").mousedown = function() {
-                scrflag = 1;
-            }
-            document.getElementById("container").mouseup = function() {
-                scrflag = 0;
-            }
-        }
+        
     }
 }
+
+
 window.onload = function () {
     ble.setUUID("UUID1",   "0000180d-0000-1000-8000-00805f9b34fb", "00002a37-0000-1000-8000-00805f9b34fb");
     layout()
@@ -208,4 +212,20 @@ window.onload = function () {
         console.log(memo_temp)
         document.getElementById("sbox").value = "";
     })
+    var isTouch = ('ontouchstart' in window);
+    if(isTouch){
+        document.getElementById("container").touchstart = function() {
+            scrflag = 1;
+        }
+        document.getElementById("container").touchend = function() {
+            scrflag = 0;
+        }
+    }else{
+        document.getElementById("container").mousedown = function() {
+            scrflag = 1;
+        }
+        document.getElementById("container").mouseup = function() {
+            scrflag = 0;
+        }
+    }
 }

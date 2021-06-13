@@ -150,11 +150,13 @@ input[type="button"]:hover {
 input[type="button"].menu_button {
     width:20%;
     max-width: 150px;
+    min-width: 90px;
     padding:0;
     background: #eee;
     color: rgba(0,0,0,.7);
     font-size: 1em;
     line-height: 1.5;
+    border: 1px solid #ddd;
 }
 
 
@@ -219,7 +221,7 @@ input[type=text], select, textarea, .field {
     left: 0;
     width: 100%;
     height: 100%;
-    grid-template-rows: 60px 1fr 5fr 40px 40px 40px 40px 40px 40px 40px 40px 38px;
+    grid-template-rows: 60px 1fr 5fr 40px 40px 40px 40px 20px 40px 40px 20px 38px;
     grid-template-columns: 1fr;
 }
 #form1{

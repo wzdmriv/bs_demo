@@ -39,7 +39,6 @@ function close_startmodal(){
   var noSleep = new NoSleep();
   noSleep.enable();
   $('#start_modalArea').fadeOut();
-  startNotify();
 }
 
 function open_calib(){
@@ -62,8 +61,7 @@ function start_calib(){
       max_sens = sens_value_calib.reduce(aryMax);
       min_sens = sens_value_calib.reduce(aryMin);
       sens_value_calib = []
-      data_chart = data_initial.concat();
-      now_time = Date.now() + 1000*60*60*9 - 1000*data_chart.length;
+      data_chart=data_init(now_time());
       console.log(data_chart)
       $('#startcalib_modalArea').fadeOut();
     }
@@ -92,7 +90,7 @@ function startRec(){
   timerID = setInterval('countup()',1000);
   $("#rec_button").off();
   $("#rec_button").click(function(){stopRec();});
-  document.getElementById("rec_Content").innerHTML = "Stop Rec";
+  document.getElementById("rec_Content").innerHTML = "Stop Log";
   $('#rec_modalArea').fadeOut();
 }
 
@@ -104,7 +102,7 @@ function stopRec(){
   document.getElementById("timer").innerHTML = "";
   $("#rec_button").off();
   $("#rec_button").click(function(){startRec();});
-  document.getElementById("rec_Content").innerHTML = "Start Rec <br><br> latest data will be discarded";
+  document.getElementById("rec_Content").innerHTML = "Start Log <br><br> latest data will be discarded";
   $('#rec_modalArea').fadeOut();
 }
 

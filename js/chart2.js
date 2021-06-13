@@ -1,7 +1,7 @@
-var now_time = Date.now() + 1000*60*60*9 - 1000*data_chart.length;
 var options = {
     chart: {
-        type: 'spline',
+        animation: false,
+        type: 'line',
         scrollablePlotArea: {
             minWidth: 20*data_chart.length,
             scrollPositionX: 1
@@ -25,6 +25,7 @@ var options = {
     legend:false,
     plotOptions: {
         spline: {
+            animation: false,
             lineWidth: 4,
             states: {
                 hover: {
@@ -33,9 +34,7 @@ var options = {
             },
             marker: {
                 enabled: false
-            },
-            pointInterval: 1000,
-            pointStart: (now_time)
+            }
         }
     },
     series: [{
